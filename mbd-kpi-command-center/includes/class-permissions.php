@@ -38,6 +38,7 @@ class MBD_KPI_Permissions {
 			'mbd_kpi_view_all',         // Company-wide data.
 			'mbd_kpi_view_division',    // Own division data.
 			'mbd_kpi_view_team',        // Direct team data.
+			'mbd_kpi_view_own',         // Own personal KPIs / records.
 			'mbd_kpi_input_actual',     // Submit actual values.
 			'mbd_kpi_verify',           // Verify evidence / actuals.
 			'mbd_kpi_manage_registry',  // Manage dictionary/registry/targets.
@@ -63,6 +64,7 @@ class MBD_KPI_Permissions {
 			'mbd_kpi_view_all',
 			'mbd_kpi_view_division',
 			'mbd_kpi_view_team',
+			'mbd_kpi_view_own',
 			'mbd_kpi_manage_okr',
 			'mbd_kpi_manage_review',
 			'mbd_kpi_verify',
@@ -72,6 +74,7 @@ class MBD_KPI_Permissions {
 			'mbd_kpi_access',
 			'mbd_kpi_view_division',
 			'mbd_kpi_view_team',
+			'mbd_kpi_view_own',
 			'mbd_kpi_input_actual',
 			'mbd_kpi_manage_okr',
 			'mbd_kpi_manage_action',
@@ -81,18 +84,21 @@ class MBD_KPI_Permissions {
 		$supervisor = array(
 			'mbd_kpi_access',
 			'mbd_kpi_view_team',
+			'mbd_kpi_view_own',
 			'mbd_kpi_input_actual',
 			'mbd_kpi_manage_action',
 			'mbd_kpi_verify',
 		);
 		$staff = array(
 			'mbd_kpi_access',
+			'mbd_kpi_view_own',
 			'mbd_kpi_input_actual',
 			'mbd_kpi_manage_action',
 		);
 		$kpi_admin = array(
 			'mbd_kpi_access',
 			'mbd_kpi_view_all',
+			'mbd_kpi_view_own',
 			'mbd_kpi_manage_registry',
 			'mbd_kpi_manage_okr',
 			'mbd_kpi_manage_settings',
@@ -228,6 +234,7 @@ class MBD_KPI_Permissions {
 		} elseif ( current_user_can( 'mbd_kpi_view_team' ) ) {
 			$scope = 'team';
 		} else {
+			// mbd_kpi_view_own (or no view cap): restricted to own records.
 			$scope = 'self';
 		}
 

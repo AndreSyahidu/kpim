@@ -1,0 +1,22 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# PHP tooling
+/vendor/
+composer.lock
+.phpcs.cache
+.phpunit.result.cache
+
+# Node / build (if ever added)
+/node_modules/
+/build/
+*.log
+
+# Local env
+*.local
+.env
