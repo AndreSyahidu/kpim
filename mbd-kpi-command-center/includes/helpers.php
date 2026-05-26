@@ -37,15 +37,17 @@ function mbd_kpi_get_setting( $key, $default = '' ) {
 function mbd_kpi_update_setting( $key, $value ) {
 	global $wpdb;
 	$table = MBD_KPI_DB::table( 'settings' );
+	$now = current_time( 'mysql' );
 	$wpdb->replace(
 		$table,
 		array(
 			'setting_key'   => $key,
 			'setting_value' => wp_json_encode( $value ),
-			'autoload'      => 1,
-			'updated_at'    => current_time( 'mysql' ),
+			'autoload'      => 'yes',
+			'created_at'    => $now,
+			'updated_at'    => $now,
 		),
-		array( '%s', '%s', '%d', '%s' )
+		array( '%s', '%s', '%s', '%s', '%s' )
 	);
 }
 

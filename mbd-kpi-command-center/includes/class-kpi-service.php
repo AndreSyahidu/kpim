@@ -133,15 +133,16 @@ class MBD_KPI_Service {
 
 		$id     = isset( $data['id'] ) ? (int) $data['id'] : 0;
 		$fields = array(
-			'user_id'       => (int) ( $data['user_id'] ?? 0 ),
-			'full_name'     => sanitize_text_field( $data['full_name'] ?? '' ),
-			'email'         => sanitize_email( $data['email'] ?? '' ),
-			'division_id'   => (int) ( $data['division_id'] ?? 0 ),
-			'position'      => sanitize_text_field( $data['position'] ?? '' ),
-			'role_key'      => sanitize_text_field( $data['role_key'] ?? 'mbd_staff' ),
-			'supervisor_id' => (int) ( $data['supervisor_id'] ?? 0 ),
-			'status'        => sanitize_text_field( $data['status'] ?? 'active' ),
-			'updated_at'    => mbd_kpi_now(),
+			'user_id'         => (int) ( $data['user_id'] ?? 0 ),
+			'full_name'       => sanitize_text_field( $data['full_name'] ?? '' ),
+			'email'           => sanitize_email( $data['email'] ?? '' ),
+			'phone'           => sanitize_text_field( $data['phone'] ?? '' ),
+			'division_id'     => (int) ( $data['division_id'] ?? 0 ),
+			'position'        => sanitize_text_field( $data['position'] ?? '' ),
+			'role_key'        => sanitize_text_field( $data['role_key'] ?? 'mbd_staff' ),
+			'supervisor_id'   => (int) ( $data['supervisor_id'] ?? 0 ),
+			'employee_status' => sanitize_text_field( $data['employee_status'] ?? 'active' ),
+			'updated_at'      => mbd_kpi_now(),
 		);
 
 		if ( $id ) {

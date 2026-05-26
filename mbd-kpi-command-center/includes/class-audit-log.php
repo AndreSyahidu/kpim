@@ -35,12 +35,27 @@ class MBD_KPI_Audit_Log {
 				'old_value'   => ( null === $old ) ? null : wp_json_encode( $old ),
 				'new_value'   => ( null === $new ) ? null : wp_json_encode( $new ),
 				'ip_address'  => self::client_ip(),
+				'user_agent'  => self::user_agent(),
 				'created_at'  => mbd_kpi_now(),
 			),
-			array( '%d', '%s', '%s', '%d', '%s', '%s', '%s', '%s' )
+			array( '%d', '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s' )
 		);
 
 		return $result ? (int) $wpdb->insert_id : false;
+	}
+
+	/**
+	 * Spec-named alias for log(). Records an audited change.
+	 *
+	 * @param string $action      Action key.
+	 * @param string $object_type Object type.
+	 * @param int    $object_id   Object id.
+	 * @param mixed  $old_value   Previous value.
+	 * @param mixed  $new_value   New value.
+	 * @return int|false
+	 */
+	public static function record( $action, $object_type, $object_id = 0, $old_value = null, $new_value = null ) {
+		return self::log( $action, $object_type, $object_id, $old_value, $new_value );
 	}
 
 	/**
@@ -50,7 +65,17 @@ class MBD_KPI_Audit_Log {
 	 */
 	private static function client_ip() {
 		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-		return substr( $ip, 0, 60 );
+		return substr( $ip, 0, 100 );
+	}
+
+	/**
+	 * Best-effort user agent string, sanitized.
+	 *
+	 * @return string
+	 */
+	private static function user_agent() {
+		$ua = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+		return substr( $ua, 0, 255 );
 	}
 
 	/**
