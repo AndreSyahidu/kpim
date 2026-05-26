@@ -1,6 +1,6 @@
 <?php
 /**
- * Sidebar navigation.
+ * Sidebar navigation partial.
  *
  * @package MBD_KPI
  */

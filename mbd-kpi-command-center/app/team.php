@@ -83,7 +83,7 @@ foreach ( $divisions as $d ) {
 					<td><?php echo esc_html( $e['position'] ); ?></td>
 					<td><?php echo esc_html( $roles[ $e['role_key'] ] ?? $e['role_key'] ); ?></td>
 					<td><?php echo esc_html( $emp_map[ (int) $e['supervisor_id'] ] ?? '—' ); ?></td>
-					<td><?php echo mbd_kpi_pill( $e['status'], 'default' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
+					<td><?php echo mbd_kpi_pill( $e['employee_status'], 'default' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
@@ -129,6 +129,15 @@ foreach ( $divisions as $d ) {
 			<div class="mbd-form-row">
 				<label><?php esc_html_e( 'WP User ID', 'mbd-kpi' ); ?><input type="number" name="user_id" placeholder="0"></label>
 				<label><?php esc_html_e( 'Position', 'mbd-kpi' ); ?><input type="text" name="position"></label>
+			</div>
+			<div class="mbd-form-row">
+				<label><?php esc_html_e( 'Phone', 'mbd-kpi' ); ?><input type="text" name="phone"></label>
+				<label><?php esc_html_e( 'Status', 'mbd-kpi' ); ?>
+					<select name="employee_status">
+						<option value="active"><?php esc_html_e( 'Active', 'mbd-kpi' ); ?></option>
+						<option value="inactive"><?php esc_html_e( 'Inactive', 'mbd-kpi' ); ?></option>
+					</select>
+				</label>
 			</div>
 			<div class="mbd-form-row">
 				<label><?php esc_html_e( 'Division', 'mbd-kpi' ); ?>

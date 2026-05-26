@@ -110,8 +110,7 @@ class MBD_KPI_Router {
 	 * @return void
 	 */
 	private function enqueue_assets() {
-		wp_enqueue_style( 'mbd-kpi-app', MBD_KPI_URL . 'assets/css/app.css', array(), MBD_KPI_VERSION );
-		wp_enqueue_script( 'mbd-kpi-app', MBD_KPI_URL . 'assets/js/app.js', array(), MBD_KPI_VERSION, true );
+		MBD_KPI_Assets::enqueue_app();
 	}
 
 	/**
@@ -492,6 +491,6 @@ class MBD_KPI_Router {
 			'scope'     => array( 'scope' => 'self', 'division_id' => 0, 'employee_id' => 0 ),
 			'period'    => mbd_kpi_current_period(),
 		);
-		include MBD_KPI_DIR . 'templates/partials/denied.php';
+		include MBD_KPI_DIR . 'app/access-denied.php';
 	}
 }
