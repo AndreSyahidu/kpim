@@ -32,6 +32,7 @@ require_once MBD_KPI_DIR . 'includes/helpers.php';
 require_once MBD_KPI_DIR . 'includes/class-db.php';
 require_once MBD_KPI_DIR . 'includes/class-permissions.php';
 require_once MBD_KPI_DIR . 'includes/class-audit-log.php';
+require_once MBD_KPI_DIR . 'includes/class-assets.php';
 require_once MBD_KPI_DIR . 'includes/class-score-engine.php';
 require_once MBD_KPI_DIR . 'includes/class-kpi-service.php';
 require_once MBD_KPI_DIR . 'includes/class-okr-service.php';

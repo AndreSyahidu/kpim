@@ -2,6 +2,9 @@
 /**
  * Access-denied screen for authenticated users without KPI access.
  *
+ * Rendered standalone by the router (outside the app layout) when a logged-in
+ * user lacks the mbd_kpi_access capability.
+ *
  * @package MBD_KPI
  */
 
