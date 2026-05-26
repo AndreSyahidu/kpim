@@ -57,6 +57,7 @@ class MBD_KPI_Admin_Settings {
 		mbd_kpi_update_setting( 'default_threshold_green', (float) ( $_POST['default_threshold_green'] ?? 100 ) );
 		mbd_kpi_update_setting( 'default_threshold_yellow', (float) ( $_POST['default_threshold_yellow'] ?? 80 ) );
 		mbd_kpi_update_setting( 'default_threshold_red', (float) ( $_POST['default_threshold_red'] ?? 0 ) );
+		mbd_kpi_update_setting( 'enable_demo_seed', ! empty( $_POST['enable_demo_seed'] ) );
 
 		MBD_KPI_Audit_Log::log( 'settings.admin_update', 'settings', 0, null, array( 'via' => 'wp-admin' ) );
 
@@ -111,6 +112,21 @@ class MBD_KPI_Admin_Settings {
 							<label><?php esc_html_e( 'Red', 'mbd-kpi' ); ?> <input name="default_threshold_red" type="number" step="any" value="<?php echo esc_attr( mbd_kpi_get_setting( 'default_threshold_red', 0 ) ); ?>"></label>
 						</td>
 					</tr>
+					<tr>
+						<th scope="row"><label for="enable_demo_seed"><?php esc_html_e( 'Demo Seed Data', 'mbd-kpi' ); ?></label></th>
+						<td>
+							<label>
+								<input name="enable_demo_seed" id="enable_demo_seed" type="checkbox" value="1" <?php checked( (bool) mbd_kpi_get_setting( 'enable_demo_seed', false ) ); ?> <?php disabled( defined( 'MBD_KPI_ENABLE_DEMO_SEED' ) && MBD_KPI_ENABLE_DEMO_SEED ); ?>>
+								<?php esc_html_e( 'Allow example KPIs to be seeded on activation', 'mbd-kpi' ); ?>
+							</label>
+							<p class="description">
+								<?php esc_html_e( 'Off by default for production. Example KPIs are only created on plugin (re)activation while this is enabled and no KPIs exist yet. Existing data is never deleted.', 'mbd-kpi' ); ?>
+								<?php if ( defined( 'MBD_KPI_ENABLE_DEMO_SEED' ) && MBD_KPI_ENABLE_DEMO_SEED ) : ?>
+									<br><strong><?php esc_html_e( 'Currently forced ON by the MBD_KPI_ENABLE_DEMO_SEED constant.', 'mbd-kpi' ); ?></strong>
+								<?php endif; ?>
+							</p>
+						</td>
+					</tr>
 				</table>
 				<?php submit_button( __( 'Save Settings', 'mbd-kpi' ) ); ?>
 			</form>
@@ -134,6 +150,8 @@ class MBD_KPI_Admin_Settings {
 					<tr><td><?php esc_html_e( 'Plugin Version', 'mbd-kpi' ); ?></td><td><?php echo esc_html( MBD_KPI_VERSION ); ?></td></tr>
 					<tr><td><?php esc_html_e( 'Database Tables', 'mbd-kpi' ); ?></td><td><?php echo esc_html( $this->table_status() ); ?></td></tr>
 					<tr><td><?php esc_html_e( 'Front-end Route', 'mbd-kpi' ); ?></td><td><code>/kpi</code></td></tr>
+					<tr><td><?php esc_html_e( 'Demo Seed', 'mbd-kpi' ); ?></td><td><?php echo mbd_kpi_demo_seed_enabled() ? esc_html__( 'Enabled', 'mbd-kpi' ) : esc_html__( 'Disabled (production-safe)', 'mbd-kpi' ); ?></td></tr>
+					<tr><td><?php esc_html_e( 'Status', 'mbd-kpi' ); ?></td><td><?php esc_html_e( 'MVP / in development (0.2.0) — foundation ahead of UI for several modules.', 'mbd-kpi' ); ?></td></tr>
 				</tbody>
 			</table>
 			<p class="description"><?php esc_html_e( 'If the /kpi route returns 404, visit Settings → Permalinks and click Save to flush rewrite rules.', 'mbd-kpi' ); ?></p>

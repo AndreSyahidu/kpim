@@ -3,7 +3,7 @@
  * Plugin Name:       MBD KPI Command Center
  * Plugin URI:        https://mbdkontraktor.local/kpi
  * Description:        Private performance operating system for MBD Kontraktor. Connects Balanced Scorecard, OKR, KPI, action plans, evidence, review cadence and management decisions. Front-end app served at /kpi.
- * Version:           1.0.0
+ * Version:           0.2.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            MBD Kontraktor
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MBD_KPI_VERSION', '1.0.0' );
+define( 'MBD_KPI_VERSION', '0.2.0' );
 define( 'MBD_KPI_FILE', __FILE__ );
 define( 'MBD_KPI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MBD_KPI_URL', plugin_dir_url( __FILE__ ) );

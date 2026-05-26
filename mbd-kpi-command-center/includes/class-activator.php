@@ -67,6 +67,10 @@ class MBD_KPI_Activator {
 		if ( '' === mbd_kpi_get_setting( 'company_name', '' ) ) {
 			mbd_kpi_update_setting( 'company_name', 'MBD Kontraktor' );
 		}
+		// Demo seed is opt-in and off by default to keep production clean.
+		if ( '' === mbd_kpi_get_setting( 'enable_demo_seed', '' ) ) {
+			mbd_kpi_update_setting( 'enable_demo_seed', false );
+		}
 	}
 
 	/**
@@ -76,6 +80,11 @@ class MBD_KPI_Activator {
 	 */
 	private static function seed_examples() {
 		global $wpdb;
+
+		// Opt-in only: never seed demo data unless explicitly enabled.
+		if ( ! mbd_kpi_demo_seed_enabled() ) {
+			return;
+		}
 
 		if ( get_option( 'mbd_kpi_seeded' ) ) {
 			return;

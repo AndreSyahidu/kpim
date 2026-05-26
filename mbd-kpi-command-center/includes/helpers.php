@@ -61,6 +61,23 @@ function mbd_kpi_now() {
 }
 
 /**
+ * Whether demonstration seed data (example KPIs) is allowed.
+ *
+ * Disabled by default so production installs are never silently populated
+ * with sample data. Enable via the `MBD_KPI_ENABLE_DEMO_SEED` constant
+ * (e.g. in wp-config.php) or the `enable_demo_seed` plugin setting, then
+ * (re)activate the plugin.
+ *
+ * @return bool
+ */
+function mbd_kpi_demo_seed_enabled() {
+	if ( defined( 'MBD_KPI_ENABLE_DEMO_SEED' ) && MBD_KPI_ENABLE_DEMO_SEED ) {
+		return true;
+	}
+	return (bool) mbd_kpi_get_setting( 'enable_demo_seed', false );
+}
+
+/**
  * Sanitize a period string. Accepts: 2026-05 (month), 2026-Q2 (quarter), 2026 (year).
  *
  * @param string $period Raw period.
